@@ -5,6 +5,13 @@ import hello.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class SingletonTest {
     @Test
@@ -13,7 +20,7 @@ public class SingletonTest {
         AppConfig appConfig = new AppConfig();
         MemberService memberService1 = appConfig.memberService();
         MemberService memberService2 = appConfig.memberService();
-        Assertions.assertThat(memberService1).isNotSameAs(memberService2);
+        assertThat(memberService1).isNotSameAs(memberService2);
     }
 
     @Test
@@ -21,8 +28,29 @@ public class SingletonTest {
     void singletonServiceTest(){
         SingletonService singletonService1 = SingletonService.getInstance();
         SingletonService singletonService2 = SingletonService.getInstance();
-        Assertions.assertThat(singletonService2).isSameAs(singletonService1);
+        assertThat(singletonService2).isSameAs(singletonService1);
         // same ==
         // equal 자바의 equals
     }
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer(){
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        // AppConfig appConfig = new AppConfig();
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+        assertThat(memberService1).isSameAs(memberService2);
+    }
+
+    @Test
+    @DisplayName("ss")
+    void springContainer2(){
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+        assertThat(memberService1).isSameAs(memberService2);
+    }
+
+
+
 }
