@@ -16,14 +16,17 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
     @Bean
     public MemberService memberService(){    // 구현 객체를 생성하고 연결하는 책임을 가지는 클래스
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     } //memberRepository의 역할이 잘 보이지 않는다.
     @Bean
     public MemberRepository memberRepository(){
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
     @Bean
     public OrderService orderService(){
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), new FixDiscountPolicy());
     }
     @Bean

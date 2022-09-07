@@ -4,7 +4,10 @@ import hello.core.AppConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.TestPropertySource;
+
+import java.lang.annotation.Annotation;
 
 public class MemberServiceTest {
     MemberService memberService;
@@ -23,4 +26,5 @@ public class MemberServiceTest {
         //then
         Assertions.assertThat(member.getId()).isEqualTo(findMember.getId());
     }
+
 }
