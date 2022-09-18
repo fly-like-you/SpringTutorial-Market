@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderServiceImpl implements OrderService{
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
+    final private MemberRepository memberRepository;
+    final private DiscountPolicy discountPolicy;
+
+
 
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {

@@ -44,7 +44,7 @@ public class ApplicationContextBasicFindTest {
     @Test
     @DisplayName("빈 이름으로 조회 X")
     void findBeanByNameX(){ // NoSuchBanDefinition 발생
-        MemberService s = ac.getBean("s", MemberService.class);
+
         assertThrows(NoSuchBeanDefinitionException.class,
                 () -> ac.getBean("s", MemberService.class)); // 예외가 발생하면 테스트 성공
     }
