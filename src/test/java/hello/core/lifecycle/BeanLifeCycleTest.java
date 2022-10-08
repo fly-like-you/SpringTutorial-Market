@@ -10,12 +10,13 @@ public class BeanLifeCycleTest {
     public void liftCycleTest(){
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
         NetworkClient client = ac.getBean(NetworkClient.class);
+        System.out.println("client = " + client);
         ac.close();
     }
 
     @Configuration
     static class LifeCycleConfig{
-        @Bean(initMethod = "init", destroyMethod = "close")
+        @Bean //(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://www.naver.com");
